@@ -1,4 +1,4 @@
-
+xx
 git merge upstream/master
 switch avr-gcc versions: echo 'export PATH="/usr/local/opt/avr-gcc@7/bin:$PATH"' >> ~/.bash_profile
 current version of avr-gcc is under /usr/local/bin
@@ -63,11 +63,6 @@ make-dir: github/qmk_firmware
 make-cmd: make jj50:default
 bootloadHID -r jj50_default.hex
 
-k-type
-keyboard-dir:github/qmk_firmware/keyboard/k_type/minh
-make-dir: github/qmk_firmware
-make-cmd: make k_type:minh
-
 lunar
 keyboard-dir:github/qmk_firmware/keyboard/ai03/lunar/minh
 make-dir: github/qmk_firmware
@@ -90,11 +85,6 @@ make-dir: github/qmk_firmware
 make-cmd: make cannonkeys/ortho60:minh
 dfu-util -d 1eaf:0003 -a 2 -D ./cannonkeys_ortho60_minh.bin
 
-ortho75
-keyboard-dir:github/qmk_firmware/keyboard/cannonkeys/ortho75/minh
-make-dir: github/qmk_firmware
-make-cmd: make cannonkeys/ortho75:minh
-dfu-util -d 1eaf:0003 -a 2 -D ./cannonkeys_ortho75_minh.bin
 
 (plancks share the same keymap file)
 planck r4
@@ -122,16 +112,10 @@ keyboard-dir:github/qmk_firmware/keyboard/romac/minh
 make-dir: github/qmk_firmware
 make-cmd: make romac:minh:dfu
 
-ut47
-keyboard-dir:github/qmk_firmware/keyboard/40percentclub/ut47/minh
+ut472
+keyboard-dir:github/qmk_firmware/keyboard//ut47/minh
 make-dir: github/qmk_firmware
-make-cmd: make 40percentclub/ut47:minh
-
-whitefox
-keyboard-dir:github/qmk_firmware/keyboard/whitefox/minh
-make-dir: github/qmk_firmware
-make-cmd: make whitefox:minh
-dfu-util -D whitefox_minh.hex
+make-cmd: make ut47:minh
 
 zlant
 keyboard-dir:github/qmk_firmware/keyboard/zlant/minh
