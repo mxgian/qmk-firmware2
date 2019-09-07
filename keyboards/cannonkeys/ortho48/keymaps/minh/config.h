@@ -27,6 +27,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define PRODUCT Ortho48
 #define DESCRIPTION Ortho48
 
+
 /* key matrix size */
 #define MATRIX_ROWS 4
 #define MATRIX_COLS 12
@@ -41,13 +42,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 /* define if matrix has ghost */
 //#define MATRIX_HAS_GHOST
+//for single ortho48 alps
+// standard ortho48 does not have an encoder!!!
 
-//#define NUMBER_OF_ENCODERS 1
-
-#define TAP_CODE_DELAY 100
-
-#define ENCODER_RESOLUTION 4
-
+#define ENCODERS_PAD_A { A9 }
+#define ENCODERS_PAD_B { A10 }
 /* Set 0 if debouncing isn't needed */
 #define DEBOUNCE    5
 

@@ -51,6 +51,5 @@ SLEEP_LED_ENABLE = yes  # Breathing sleep LED during USB suspend
 NKRO_ENABLE = yes	    # USB Nkey Rollover
 BACKLIGHT_ENABLE = yes
 RGBLIGHT_ENABLE = yes
-ENCODER_ENABLE = no
 
-LAYOUTS = ortho_5x12
+LAYOUTS = ortho_4x12

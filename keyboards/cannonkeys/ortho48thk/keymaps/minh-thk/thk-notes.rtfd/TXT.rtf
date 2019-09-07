@@ -1,0 +1,69 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf200
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fnil\fcharset0 Menlo-Regular;\f2\froman\fcharset0 Times-Roman;
+}
+{\colortbl;\red255\green255\blue255;\red202\green202\blue202;\red183\green111\blue179;\red23\green23\blue23;
+\red70\green137\blue204;\red212\green214\blue154;\red89\green138\blue67;\red23\green23\blue23;\red202\green202\blue202;
+\red183\green111\blue179;\red70\green137\blue204;\red212\green214\blue154;\red0\green0\blue0;}
+{\*\expandedcolortbl;;\cssrgb\c83137\c83137\c83137;\cssrgb\c77255\c52549\c75294;\cssrgb\c11765\c11765\c11765;
+\cssrgb\c33725\c61176\c83922;\cssrgb\c86275\c86275\c66667;\cssrgb\c41569\c60000\c33333;\cssrgb\c11765\c11765\c11765;\cssrgb\c83137\c83137\c83137;
+\cssrgb\c77255\c52549\c75294;\cssrgb\c33725\c61176\c83922;\cssrgb\c86275\c86275\c66667;\cssrgb\c0\c0\c0;}
+\margl1440\margr1440\vieww24240\viewh26260\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 THK -> BluePill Mappings\
+\
+\
+THK PIN Definitions\
+#define MATRIX_ROW_PINS \{ A7, A6, A5, A4 \}\
+#define MATRIX_COL_PINS \{ D7, C2, C3, C4, C5, C6, C7, A3, A2, A1, A0, B0 \}\
+\
+// #define DIODE_DIRECTION COL2ROW\
+\
+\
+#define NUMBER_OF_ENCODERS 2\
+#define ENCODERS_PAD_A \{ B4, B2 \}\
+#define ENCODERS_PAD_B \{ B3, B1 \}\
+\
+\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 {{\NeXTGraphic Pasted Graphic.png \width11200 \height9240 \appleattachmentpadding0 \appleembedtype0 \appleaqc
+}¬}\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \
+\
+Ortho48/Bluepill definitions\
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f1 \cf2 \expnd0\expndtw0\kerning0
+\
+\cf3 \cb4 #define\cf5  \cf6 MATRIX_COL_PINS\cf5  \{ B11, B10, B1, B0, A7, A6, A5, B14, A15, A0, C15, C14\}\cf2 \cb1 \
+\cf3 \cb4 #define\cf5  \cf6 MATRIX_ROW_PINS\cf5  \{ B12, C13, A2, A1 \}\cf2 \cb1 \
+\cf3 \cb4 #define\cf5  \cf6 DIODE_DIRECTION\cf5  COL2ROW\cf2 \cb1 \
+\pard\pardeftab720\sl360\partightenfactor0
+\cf7 \cb8 \outl0\strokewidth0 \strokec7 \
+//for thk orth048 I added these\cf9 \cb1 \strokec9 \
+\cf10 \cb8 \strokec10 #define\cf11 \strokec11  \cf12 \strokec12 ENCODERS_PAD_A\cf11 \strokec11  \{ B8, B9 \}\cf9 \cb1 \strokec9 \
+\cf10 \cb8 \strokec10 #define\cf11 \strokec11  \cf12 \strokec12 ENCODERS_PAD_B\cf11 \strokec11  \{ B6, B7 \}\cf9 \cb1 \strokec9 \
+\
+\cf13 for the oled i2c pins default to b6 and b7, these have to be  i2c pins, so only options are b6,b7,b8,b9,b10,b11\'97pay attention to which ones are scl vs sda pins	\cf9 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f0 \cf0 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 \
+\
+\
+\pard\pardeftab720\sl280\partightenfactor0
+
+\f2 \cf13 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec13 \pard\pardeftab720\sl280\partightenfactor0
+\cf13 
+\f0 \cf0 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {{\NeXTGraphic 1__#$!@%!#__Pasted Graphic.png \width17480 \height13700 \appleattachmentpadding0 \appleembedtype0 \appleaqc
+}¬}\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 {{\NeXTGraphic Pasted Graphic 1.png \width14060 \height9220 \appleattachmentpadding0 \appleembedtype0 \appleaqc
+}¬}\
+\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \
+}

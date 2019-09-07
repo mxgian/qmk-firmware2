@@ -24,8 +24,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 /* in python2: list(u"whatever".encode('utf-16-le')) */
 /*   at most 32 characters or the ugly hack in usb_main.c borks */
 #define MANUFACTURER QMK
-#define PRODUCT Ortho48
-#define DESCRIPTION Ortho48
+#define PRODUCT Ortho48-THK
+#define DESCRIPTION Ortho48-THK
 
 /* key matrix size */
 #define MATRIX_ROWS 4
@@ -44,9 +44,24 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 //#define NUMBER_OF_ENCODERS 1
 
+//for thk orth048
+#define ENCODERS_PAD_A { B8, B9 }
+#define ENCODERS_PAD_B { B3, B4 }
+
 #define TAP_CODE_DELAY 100
 
 #define ENCODER_RESOLUTION 4
+/*
+#ifdef I2C1_SCL
+    #undef I2C1_SCL 6
+#endif
+#ifdef I2C1_SDA
+    #undef I2C1_SDA 7
+#endif
+
+#define I2C1_SCL 6
+#define I2C1_SDA 7
+*/
 
 /* Set 0 if debouncing isn't needed */
 #define DEBOUNCE    5
@@ -57,8 +72,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define LOCKING_RESYNC_ENABLE
 
 #define RGBLIGHT_ANIMATIONS
-
-#define WS2812_LED_N 9
+#ifdef WS2812_LED_N
+    #undef WS2812_LED_N
+#endif
+#define WS2812_LED_N 10
 #define RGBLED_NUM WS2812_LED_N
 #define PORT_WS2812     GPIOB
 #define PIN_WS2812      15
