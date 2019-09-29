@@ -24,6 +24,7 @@ avrdude -c usbtiny -p m32u4  -U flash:w:"romac_minh_production.hex":a -U lfuse:w
 #define _BASE 0
 #define _FN1 1
 #define _FN2 2
+#define _FN3 2
 
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -32,7 +33,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 		KC_VOLU,  RGB_TOG,  KC_PGUP, \
 		KC_VOLD,  KC_UP,    KC_PGDN, \
 		KC_LEFT,  KC_DOWN,  KC_RIGHT, \
-		TG(_FN1), LT(_FN2,KC_SPC), KC_ENT \
+		TG(_FN1), LT(_FN2,KC_SPC), LT(_FN3,KC_ENT) \
 	),
 
 	[_FN1] = LAYOUT(
@@ -43,6 +44,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 	),
     [_FN2] = LAYOUT(
+		KC_PPLS, KC_PMNS, KC_BSPC, \
+		KC_PAST, KC_PSLS, KC_PENT, \
+		KC_PCMM, KC_PDOT, KC_PEQL, \
+		KC_TRNS, KC_SPC, KC_DEL \
+
+	),
+    [_FN3] = LAYOUT(
 		KC_VOLU, RGB_TOG, RGB_HUI, \
 		KC_VOLD, RGB_MOD, RGB_HUD, \
 		KC_MUTE, KC_2,    RGB_VAI, \
@@ -50,3 +58,38 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 	)
 };
+void keyboard_pre_init_user(void) {
+// Call the keyboard pre init code.
+// Set our LED pins as output.
+// Pro Micro LEDs are active low.
+setPinOutput(B0);
+setPinOutput(D5);
+}
+
+// Runs constantly in the background, in a loop.
+void matrix_scan_user(void) {
+uint8_t layer = biton32(layer_state);
+switch (layer) {
+case 0:
+// LED 00
+writePinHigh(B0);
+writePinHigh(D5);
+break;
+case 1:
+// LED 01
+writePinHigh(B0);
+writePinLow(D5);
+break;
+case 2:
+// LED 10
+writePinLow(B0);
+writePinHigh(D5);
+break;
+case 3:
+// LED 11
+writePinLow(B0);
+writePinLow(D5);
+break;
+}
+};
+

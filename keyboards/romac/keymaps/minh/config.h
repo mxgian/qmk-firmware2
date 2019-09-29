@@ -8,16 +8,11 @@
 #define DEVICE_VER      0x0001
 #define MANUFACTURER    TheRoyalSweatshirt
 #define PRODUCT         romac
-#define DESCRIPTION     A *Plaid inspired twelve-key macropad
+#define DESCRIPTION     A Plaid inspired twelve-key macropad
 /* key matrix size */
 #define MATRIX_ROWS 4
 #define MATRIX_COLS 3
 
-/* for QMK DFU */
-#define QMK_ESC_OUTPUT F7 // usually COL
-#define QMK_ESC_INPUT D4 // usually ROW
-#define QMK_LED B0
-//#define QMK_SPEAKER C6
 
 
 /* key matrix pins */
@@ -42,6 +37,10 @@
 #define LOCKING_RESYNC_ENABLE
 
 //added this section to add RGB underglow support
+#ifdef RGBLED_NUM
+#undef RGBLED_NUM
+#endif
+
 #define RGB_DI_PIN F5
 #ifdef RGB_DI_PIN
  #define RGBLED_NUM 12

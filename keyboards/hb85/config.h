@@ -24,7 +24,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define MANUFACTURER    GrayStudio
 #define PRODUCT         HB85
 
-#define RGBLED_NUM 5
+#define RGBLED_NUM 9
 
 #define MATRIX_ROWS 8
 #define MATRIX_COLS 15
@@ -37,7 +37,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define DEBOUNCING_DELAY 5
 
 #define NO_BACKLIGHT_CLOCK
-#define BACKLIGHT_LEVELS 1
+#define BACKLIGHT_LEVELS 5
 #define RGBLIGHT_ANIMATIONS
 
 

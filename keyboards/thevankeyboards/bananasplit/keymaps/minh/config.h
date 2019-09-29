@@ -18,7 +18,8 @@
 #define CONFIG_USER_H
 
 #include "../../config.h"
-
+#undef TAPPING_TERM
+#define TAPPING_TERM 300
 // place overrides here
 
 #endif
