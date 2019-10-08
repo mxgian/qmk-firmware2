@@ -17,15 +17,22 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #pragma once
 
+#include "config_common.h"
+
 /* USB Device descriptor parameter */
 #define VENDOR_ID       0xCA04
 #define PRODUCT_ID      0x0248
 #define DEVICE_VER      0x0001
 /* in python2: list(u"whatever".encode('utf-16-le')) */
 /*   at most 32 characters or the ugly hack in usb_main.c borks */
-#define MANUFACTURER QMK
-#define PRODUCT Ortho48
-#define DESCRIPTION Ortho48
+#undef MANUFACTURER
+#undef PRODUCT
+#undef DESCRIPTION
+
+
+#define MANUFACTURER minhgiang
+#define PRODUCT Ortho48-THK
+#define DESCRIPTION Ortho48-THK
 
 /* key matrix size */
 #define MATRIX_ROWS 4
@@ -53,6 +60,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define ENCODER_RESOLUTION 4
 
 #define SSD1306OLED
+
+#ifdef QWIIC_MICRO_OLED_ENABLE
+#include "micro_oled.h"
+#include "qwiic.h"
+#endif
+
 /*
 #ifdef I2C1_SCL
     #undef I2C1_SCL 6
@@ -61,9 +74,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     #undef I2C1_SDA 7
 #endif
 
-#define I2C1_SCL 6
-#define I2C1_SDA 7
+#define I2C1_SCL B6
+#define I2C1_SDA B7
 */
+
 /* Set 0 if debouncing isn't needed */
 #define DEBOUNCE    5
 
@@ -82,6 +96,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define PIN_WS2812      15
 #define WS2812_SPI SPID2
 
+#define B5_AUDIO
 
 
 

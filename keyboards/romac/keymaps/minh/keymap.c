@@ -24,7 +24,7 @@ avrdude -c usbtiny -p m32u4  -U flash:w:"romac_minh_production.hex":a -U lfuse:w
 #define _BASE 0
 #define _FN1 1
 #define _FN2 2
-#define _FN3 2
+#define _FN3 3
 
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -47,14 +47,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 		KC_PPLS, KC_PMNS, KC_BSPC, \
 		KC_PAST, KC_PSLS, KC_PENT, \
 		KC_PCMM, KC_PDOT, KC_PEQL, \
-		KC_TRNS, KC_SPC, KC_DEL \
+		KC_TRNS, KC_TRNS, KC_TRNS \
 
 	),
     [_FN3] = LAYOUT(
 		KC_VOLU, RGB_TOG, RGB_HUI, \
 		KC_VOLD, RGB_MOD, RGB_HUD, \
-		KC_MUTE, KC_2,    RGB_VAI, \
-		KC_TRNS, KC_TRNS, RGB_VAD \
+		KC_MUTE, RGB_VAD,   RGB_VAI, \
+		KC_TRNS, KC_TRNS,  KC_TRNS \
 
 	)
 };

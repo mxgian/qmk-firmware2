@@ -1,4 +1,3 @@
-xx
 git merge upstream/master
 switch avr-gcc versions: echo 'export PATH="/usr/local/opt/avr-gcc@7/bin:$PATH"' >> ~/.bash_profile
 current version of avr-gcc is under /usr/local/bin
@@ -36,20 +35,37 @@ make-dir: github/qmk_firmware
 make-cmd: make espectro:minh
 
 gh60 satan (brutal60)
-keyboard-dir:github/qmk_firmware/keyboard/satan/minh
+keyboard-dir:github/qmk_firmware/keyboards/satan/minh
 make-dir: github/qmk_firmware
 make-cmd: make satan:minh
 
 gherkin-rgb
-keyboard-dir:github/tmk_keyboard/keyboard/gherkin_rgb
-make-dir: github/tmk_keyboard/keyboard/gherkin_rgb
+keyboard-dir:github/tmk_keyboard/keyboard/gherkin-rgb
+make-dir: github/tmk_keyboard/keyboard/gherkin-rgb
 make-cmd: make
 
+gherkin-qmk
+keyboard-dir:github/qmk_keyboard/keyboards/40percentclub/gherkin
+make-dir: github/qmk_keyboard/keyboards/40percentclub/gherkin
+make-cmd: make
+
+hadron
+keyboard-dir:github/qmk_firmware/keyboards/hadron/minh
+make-dir: github/qmk_firmware
+make-cmd: make hadron/ver3:minh
+ dfu-util -a 0 -d 0482:df11 -s 0x8000000:leave -D ./hadron_ver3_minh.hex
+
 hb85 (not in the main qmk repo)
-keyboard-dir:github/qmk_firmware/keyboard/hb85/minh
+to put it into bootloader mode, hold down F3 and plug it in
+keyboard-dir:github/qmk_firmware/keyboards/hb85/minh
 make-dir: github/qmk_firmware
 make-cmd: make hb85:default
 bootloadHID -r hb85_default.hex
+
+h87a
+keyboard-dir:github/qmk_firmware/keyboard/hineybush/h87a/minh
+make-dir: github/qmk_firmware
+make-cmd: make hineybush/h87a:minh:dfu
 
 instant60
 keyboard-dir:github/qmk_firmware/keyboard/cannonkeys/instant60/minh
