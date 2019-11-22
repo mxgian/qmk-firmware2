@@ -17,4 +17,8 @@
 #pragma once
 
 // place overrides here
+#undef RGBLED_NUM
+#define RGBLED_NUM 32
+#define RGBLIGHT_EFFECT_BREATHING
+
 

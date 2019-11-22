@@ -1,41 +1,51 @@
+keyboard directories to zip up when rebuilding
+(run this from github/qmk_firmware)
+zip all-my-keebs.zip keyboards/thevankeyboards/bananasplit/keymaps/minh keyboards/keebio/bdn9/keymaps/minh
+
+
 git merge upstream/master
 switch avr-gcc versions: echo 'export PATH="/usr/local/opt/avr-gcc@7/bin:$PATH"' >> ~/.bash_profile
 current version of avr-gcc is under /usr/local/bin
 
+amj40
+keyboard-dir:github/qmk_firmware/keyboards/amj40/keymaps/minh
+make-dir: github/qmk_firmware
+make-cmd: make keebio/bdn9:minh  (avrdude)
 
 bananasplit
-keyboard-dir:github/qmk_firmware/keyboard/thevankeyboards/bananasplit/minh
+keyboard-dir:github/qmk_firmware/keyboard/thevankeyboards/bananasplit/keymaps/minh
 make-dir: github/qmk_firmware
 make-cmd: make thevankeyboards/bananasplit:minh
 
 bdn9
-keyboard-dir:github/qmk_firmware/keyboard/keebio/bdn9/minh
+keyboard-dir:github/qmk_firmware/keyboards/keebio/bdn9/keymaps/minh
 make-dir: github/qmk_firmware
 make-cmd: make keebio/bdn9:minh  (avrdude)
 
 chicory40
 http://ydkb.io/#
 http://help.ydkb.io/doku.php?id=en:bootloader:boothid
+bootloadHID -r
 
 crkbd
 (if using a pro-micro, remember if it is using caterina or qmk-DFU)
-keyboard-dir:github/qmk_firmware/keyboard/keebio/crkbd/minh
+keyboard-dir:github/qmk_firmware/keyboard/keebio/crkbd/keymaps/minh
 make-dir: github/qmk_firmware
 make-cmd: make crkbd:minh  (dfu or avrdude)
 
 ergodash
-keyboard-dir:github/qmk_firmware/keyboard/ergodash/default
+keyboard-dir:github/qmk_firmware/keyboard/ergodash/rev2/keymaps/minh
 make-dir: github/qmk_firmware
 switch avr-gcc versions: export PATH="/usr/local/opt/avr-gcc@7/bin:$PATH"
 make-cmd: make ergodash/rev2:minh  (dfu or avrdude)
 
 espectro
-keyboard-dir:github/qmk_firmware/keyboard/espectro/minh
+keyboard-dir:github/qmk_firmware/keyboard/espectro/keymaps/minh
 make-dir: github/qmk_firmware
 make-cmd: make espectro:minh
 
 gh60 satan (brutal60)
-keyboard-dir:github/qmk_firmware/keyboards/satan/minh
+keyboard-dir:github/qmk_firmware/keyboards/satan/keymaps/minh
 make-dir: github/qmk_firmware
 make-cmd: make satan:minh
 
@@ -50,7 +60,7 @@ make-dir: github/qmk_keyboard/keyboards/40percentclub/gherkin
 make-cmd: make
 
 hadron
-keyboard-dir:github/qmk_firmware/keyboards/hadron/minh
+keyboard-dir:github/qmk_firmware/keyboards/hadron/keymaps/minh
 make-dir: github/qmk_firmware
 make-cmd: make hadron/ver3:minh
  dfu-util -a 0 -d 0482:df11 -s 0x8000000:leave -D ./hadron_ver3_minh.hex
@@ -63,40 +73,46 @@ make-cmd: make hb85:default
 bootloadHID -r hb85_default.hex
 
 h87a
-keyboard-dir:github/qmk_firmware/keyboard/hineybush/h87a/minh
+keyboard-dir:github/qmk_firmware/keyboards/hineybush/h87a/keymaps/minh
 make-dir: github/qmk_firmware
 make-cmd: make hineybush/h87a:minh:dfu
 
 instant60
-keyboard-dir:github/qmk_firmware/keyboard/cannonkeys/instant60/minh
+keyboard-dir:github/qmk_firmware/keyboards/cannonkeys/instant60/keymaps/minh
 make-dir: github/qmk_firmware
 make-cmd: make cannonkeys/instant60:minh
 dfu-util -d 0483:df11 -a 0 -s 0x8000000 -D ./cannonkeys_instant60_minh.bin
 
 jj50 (bootmapper to QMK)
-keyboard-dir:github/qmk_firmware/keyboard/jj50/minh
+keyboard-dir:github/qmk_firmware/keyboards/jj50/keymaps/minh
 make-dir: github/qmk_firmware
 make-cmd: make jj50:default
 bootloadHID -r jj50_default.hex
 
 lunar
-keyboard-dir:github/qmk_firmware/keyboard/ai03/lunar/minh
+keyboard-dir:github/qmk_firmware/keyboards/ai03/lunar/keymaps/minh
 make-dir: github/qmk_firmware
 make-cmd: make ai03/lunar:minh
 
 mod dasher:
-keyboard-dir:github/qmk_firmware/keyboard/tr60w/minh
+keyboard-dir:github/qmk_firmware/keyboards/tr60w/keymaps/minh
 make-dir: github/qmk_firmware
 make-cmd: make tr60w:minh
 
 ortho48
-keyboard-dir:github/qmk_firmware/keyboard/cannonkeys/ortho48/minh
+keyboard-dir:github/qmk_firmware/keyboards/cannonkeys/ortho48/keymaps/minh
 make-dir: github/qmk_firmware
 make-cmd: make cannonkeys/ortho48:minh
 dfu-util -d 1eaf:0003 -a 2 -D ./cannonkeys_ortho48_minh.bin
 
+ortho48-thk
+keyboard-dir:github/qmk_firmware/keyboards/cannonkeys/ortho48/keymaps/minh-thk
+make-dir: github/qmk_firmware
+make-cmd: make cannonkeys/ortho48:minh-thk
+dfu-util -d 1eaf:0003 -a 2 -D ./cannonkeys_ortho48_minh-thk.bin
+
 ortho60
-keyboard-dir:github/qmk_firmware/keyboard/cannonkeys/ortho60/minh
+keyboard-dir:github/qmk_firmware/keyboards/cannonkeys/ortho60/keymaps/minh
 make-dir: github/qmk_firmware
 make-cmd: make cannonkeys/ortho60:minh
 dfu-util -d 1eaf:0003 -a 2 -D ./cannonkeys_ortho60_minh.bin
@@ -104,36 +120,36 @@ dfu-util -d 1eaf:0003 -a 2 -D ./cannonkeys_ortho60_minh.bin
 
 (plancks share the same keymap file)
 planck r4
-keyboard-dir:github/qmk_firmware/keyboard/planck/minh
+keyboard-dir:github/qmk_firmware/keyboards/planck/keymaps/minh
 make-dir: github/qmk_firmware
 make-cmd: make planck/rev4:minh
 
 planck r6 (canvas)
-keyboard-dir:github/qmk_firmware/keyboard/planck/minh
+keyboard-dir:github/qmk_firmware/keyboards/planck/keymaps/minh
 make-dir: github/qmk_firmware
 make-cmd: make planck/rev6:minh
 
 planck r6 (datamancer, 2 spacebars)
-keyboard-dir:github/qmk_firmware/keyboard/planck/minh-2spc
+keyboard-dir:github/qmk_firmware/keyboards/planck/keymaps/minh-2spc
 make-dir: github/qmk_firmware
 make-cmd: make planck/rev6:minh-2spc
 
 roadkit
-keyboard-dir:github/qmk_firmware/keyboard/thevankeyboards/roadkit/minh
+keyboard-dir:github/qmk_firmware/keyboards/thevankeyboards/roadkit/keymaps/minh
 make-dir: github/qmk_firmware
 make-cmd: make thevankeyboards/roadkit:minh
 
 romac (pro-micro on this has been converted to QMK-DFU)
-keyboard-dir:github/qmk_firmware/keyboard/romac/minh
+keyboard-dir:github/qmk_firmware/keyboards/romac/keymaps/minh
 make-dir: github/qmk_firmware
 make-cmd: make romac:minh:dfu
 
 ut472
-keyboard-dir:github/qmk_firmware/keyboard//ut47/minh
+keyboard-dir:github/qmk_firmware/keyboards/ut472/keymaps/minh
 make-dir: github/qmk_firmware
-make-cmd: make ut47:minh
+make-cmd: make ut472:minh
 
 zlant
-keyboard-dir:github/qmk_firmware/keyboard/zlant/minh
+keyboard-dir:github/qmk_firmware/keyboards/zlant/keymaps/minh
 make-dir: github/qmk_firmware
 make-cmd: make zlant:minh

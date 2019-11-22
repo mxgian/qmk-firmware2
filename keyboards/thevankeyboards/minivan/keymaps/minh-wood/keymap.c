@@ -72,23 +72,47 @@ void persistent_default_layer_set(uint16_t default_layer) {
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       switch(keycode) {
-        case DVORAK:
-          if (record->event.pressed) {
-            persistent_default_layer_set(1UL<<_DV);
-          }
-          return false;
-        case QWERTY:
-          if (record->event.pressed) {
-            persistent_default_layer_set(1UL<<_QW);
-          }
-          return false;
-        case COLEMAK:
-          if (record->event.pressed) {
-            persistent_default_layer_set(1UL<<_CM);
-          }
-          return false;
-        default:
-          return true;
+
       }
     return true;
 };
+void keyboard_post_init_user(void) {
+  #ifdef RGBLIGHT_ENABLE
+    // Set up RGB effects on _only_ the third LED (index 2)
+    rgblight_set_effect_range(2, 1);
+    // Set LED effects to breathing mode in a tealish blue color
+    rgblight_sethsv_noeeprom(185, 255, 255);
+    rgblight_mode_noeeprom(RGBLIGHT_EFFECT_BREATHING + 2);
+
+    // Init the first two LEDs to a static color
+    setrgb(0, 0, 0, (LED_TYPE *)&led[0]);
+    setrgb(0, 0, 0, (LED_TYPE *)&led[1]);
+    rgblight_set();
+  #endif //RGBLIGHT_ENABLE
+}
+
+uint32_t layer_state_set_user(uint32_t state){
+  #ifdef RGBLIGHT_ENABLE
+    uint8_t led0r = 0; uint8_t led0g = 0; uint8_t led0b = 0;
+    uint8_t led1r = 0; uint8_t led1g = 0; uint8_t led1b = 0;
+
+    if (layer_state_cmp(state, 1)) {
+      led0r = 255;
+    }
+    if (layer_state_cmp(state, 2)) {
+      led0g = 255;
+    }
+
+    if (layer_state_cmp(state, 4)) {
+      led1b = 255;
+    }
+    if (layer_state_cmp(state, 5)) {
+      led1r = 255;
+    }
+
+    setrgb(led0r, led0g, led0b, (LED_TYPE *)&led[0]);
+    setrgb(led1r, led1g, led1b, (LED_TYPE *)&led[1]);
+    rgblight_set();
+  #endif //RGBLIGHT_ENABLE
+  return state;
+}
