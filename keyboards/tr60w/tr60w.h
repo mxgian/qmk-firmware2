@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 #ifndef TR60W_H
 #define TR60W_H
 
@@ -21,7 +20,6 @@
 }
 
 #endif
-=======
 #pragma once
 
 #include "quantum.h"
@@ -40,4 +38,3 @@
     { K400,  K401,  K402,  KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO }, \
     { KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, K505,  KC_NO, KC_NO, KC_NO, KC_NO, K510,  K511,  K512,  KC_NO }  \
 }
->>>>>>> 7085066f0860087fa140241d25b29ad5f60c8179

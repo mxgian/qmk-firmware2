@@ -1,6 +1,4 @@
 #include "tr60w.h"
-<<<<<<< HEAD
-=======
 
 bool led_update_kb(led_t led_state) {
     bool runDefault = led_update_user(led_state);
@@ -11,4 +9,3 @@ bool led_update_kb(led_t led_state) {
     }
     return runDefault;
 }
->>>>>>> 7085066f0860087fa140241d25b29ad5f60c8179
