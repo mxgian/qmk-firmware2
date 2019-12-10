@@ -11,8 +11,8 @@ extern keymap_config_t keymap_config;
 #define _L1 1
 #define _L2 2
 #define _L3 3
-#define _DV 3
-#define _CM 3
+#define _DV 4
+#define _CM 5
 
 
 // Curly braces have their own keys. These are defined to make them not mess up
@@ -32,7 +32,7 @@ enum custom_keycodes {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_QW] = LAYOUT( /* Qwerty */
     KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC,
-    KC_ESC,  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,
+    LT(_L3,KC_ESC),  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,
     KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, RSFT_T(KC_SLSH),
     KC_LCTL, KC_LALT, KC_LGUI,   LT(_L1,KC_ENT),  LT(_L2,KC_SPC),  MO(_L3), KC_LEFT, MO(_L3)
   ),

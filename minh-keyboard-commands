@@ -7,6 +7,8 @@ git merge upstream/master
 switch avr-gcc versions: echo 'export PATH="/usr/local/opt/avr-gcc@7/bin:$PATH"' >> ~/.bash_profile
 current version of avr-gcc is under /usr/local/bin
 
+
+
 amj40
 keyboard-dir:github/qmk_firmware/keyboards/amj40/keymaps/minh
 make-dir: github/qmk_firmware
@@ -21,6 +23,11 @@ bdn9
 keyboard-dir:github/qmk_firmware/keyboards/keebio/bdn9/keymaps/minh
 make-dir: github/qmk_firmware
 make-cmd: make keebio/bdn9:minh  (avrdude)
+
+brutal 60 - GH60/satan
+keyboard-dir:github/qmk_firmware/keyboards/gh60/satan/keymaps/minh
+make-dir: github/qmk_firmware
+make-cmd: make gh60/satan:minh:dfu
 
 chicory40
 http://ydkb.io/#
@@ -134,15 +141,25 @@ keyboard-dir:github/qmk_firmware/keyboards/planck/keymaps/minh-2spc
 make-dir: github/qmk_firmware
 make-cmd: make planck/rev6:minh-2spc
 
+prime_e
+keyboard-dir:github/qmk_firmware/keyboards/primekb/prime_e/keymaps/minh
+make-dir: github/qmk_firmware
+make-cmd: make primekb/prime_e:minh
+
 roadkit
 keyboard-dir:github/qmk_firmware/keyboards/thevankeyboards/roadkit/keymaps/minh
 make-dir: github/qmk_firmware
 make-cmd: make thevankeyboards/roadkit:minh
 
-romac (pro-micro on this has been converted to QMK-DFU)
-keyboard-dir:github/qmk_firmware/keyboards/romac/keymaps/minh
+minivan-arrow
+keyboard-dir:github/qmk_firmware/keyboards/thevankeyboards/minivan/keymaps/minh-arrow
 make-dir: github/qmk_firmware
-make-cmd: make romac:minh:dfu
+make-cmd: make thevankeyboards/minivan:minh-arrow
+
+romac (pro-micro on this has been converted to QMK-DFU)
+keyboard-dir:github/qmk_firmware/keyboards/kingly_keys/romac/keymaps/minh
+make-dir: github/qmk_firmware
+make-cmd: make kingly_keys/romac:minh:dfu
 
 ut472
 keyboard-dir:github/qmk_firmware/keyboards/ut472/keymaps/minh

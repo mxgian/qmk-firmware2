@@ -34,7 +34,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      */
     [1] = LAYOUT(
         RESET  , BL_STEP, KC_STOP,
-        _______, KC_HOME, RGB_MOD,
+        _______, KC_HOME, RGB_TOG,
         KC_MPRV, KC_END , KC_MNXT
     ),
 };

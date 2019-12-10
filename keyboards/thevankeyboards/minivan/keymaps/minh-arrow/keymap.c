@@ -11,8 +11,8 @@ extern keymap_config_t keymap_config;
 #define _L1 1
 #define _L2 2
 #define _L3 3
-#define _DV 3
-#define _CM 3
+#define _DV 4
+#define _CM 5
 
 
 // Curly braces have their own keys. These are defined to make them not mess up
@@ -28,10 +28,10 @@ enum custom_keycodes {
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_QW] = LAYOUT_arrow( /* Qwerty */
-    LT(_L3,KC_TAB),  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC,
-    KC_ESC,  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_ENT,
+    KC_ESC,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC,
+    LT(_L3,KC_TAB),  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_ENT,
     KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_UP, RSFT_T(KC_SLSH),
-    KC_LCTL, KC_LALT, KC_LGUI,   LT(_L1,KC_ENT),  LT(_L2,KC_SPC),           MT(_L3,KC_RALT), KC_LEFT, KC_DOWN, KC_RIGHT
+    KC_LCTL, KC_LALT, KC_LGUI,   LT(_L1,KC_ENT),  LT(_L2,KC_SPC),           LT(_L3,KC_RALT), KC_LEFT, KC_DOWN, KC_RIGHT
   ),
   [_L1] = LAYOUT_arrow( /* LAYER 1 */
     KC_TILD, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_PIPE,
@@ -47,9 +47,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
   [_L3] = LAYOUT_arrow( /* LAYER 3 */
     _______, _______, KC_UP, _______, _______, _______, _______, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_DEL,
-    KC_ESC,  KC_LEFT, KC_DOWN, KC_RIGHT, _______, _______, _______, KC_F5,   KC_F6,   KC_F7,   KC_F8,   _______,
-    KC_LSFT, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_F9,   KC_F10,  KC_F11,  KC_F12,  _______,
-    RESET, KC_LSFT, KC_B,                      KC_SPC,  KC_C,              _______,_______, _______, _______
+    KC_ESC,  KC_LEFT, KC_DOWN, KC_RIGHT, _______, _______, _______, KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_MUTE,
+    KC_LSFT, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_F9,   KC_F10,  KC_F11,  KC_F12,  KC_VOLU,
+    RESET, KC_LSFT, KC_B,                      _______,  _______,              _______,_______, RGB_MOD, KC_VOLD
   ),
   [_DV] = LAYOUT( /* Dvorak */
     KC_TAB,  KC_SLSH, KC_COMM, KC_DOT,  KC_P,    KC_Y,    KC_F,    KC_G,    KC_C,    KC_R,    KC_L,    KC_BSPC,
@@ -79,14 +79,14 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 void keyboard_post_init_user(void) {
   #ifdef RGBLIGHT_ENABLE
     // Set up RGB effects on _only_ the third LED (index 2)
-    rgblight_set_effect_range(2, 1);
+    rgblight_set_effect_range(0, 1);
     // Set LED effects to breathing mode in a tealish blue color
     rgblight_sethsv_noeeprom(185, 255, 255);
-    rgblight_mode_noeeprom(RGBLIGHT_EFFECT_BREATHING + 2);
-
+    //rgblight_mode_noeeprom(RGBLIGHT_EFFECT_BREATHING + 2);
+    rgblight_mode_noeeprom(RGBLIGHT_MODE_STATIC_LIGHT);
     // Init the first two LEDs to a static color
-    setrgb(0, 0, 0, (LED_TYPE *)&led[0]);
     setrgb(0, 0, 0, (LED_TYPE *)&led[1]);
+    setrgb(0, 0, 0, (LED_TYPE *)&led[2]);
     rgblight_set();
   #endif //RGBLIGHT_ENABLE
 }
@@ -100,7 +100,7 @@ uint32_t layer_state_set_user(uint32_t state){
       led0r = 255;
     }
     if (layer_state_cmp(state, 2)) {
-      led0g = 255;
+      led1g = 255;
     }
 
     if (layer_state_cmp(state, 4)) {
@@ -110,8 +110,8 @@ uint32_t layer_state_set_user(uint32_t state){
       led1r = 255;
     }
 
-    setrgb(led0r, led0g, led0b, (LED_TYPE *)&led[0]);
-    setrgb(led1r, led1g, led1b, (LED_TYPE *)&led[1]);
+    setrgb(led0r, led0g, led0b, (LED_TYPE *)&led[1]);
+    setrgb(led1r, led1g, led1b, (LED_TYPE *)&led[2]);
     rgblight_set();
   #endif //RGBLIGHT_ENABLE
   return state;
