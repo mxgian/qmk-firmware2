@@ -24,6 +24,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define MANUFACTURER    GrayStudio
 #define PRODUCT         HB85
 
+//5LEDS for the bar, 4 leds for the switch halo
 #define RGBLED_NUM 9
 
 #define MATRIX_ROWS 8

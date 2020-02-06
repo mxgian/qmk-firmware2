@@ -9,6 +9,9 @@
 #endif
 #ifdef OLED_DRIVER_ENABLE
   #include "oled_driver.h"
+  static uint32_t oled_timer                       = 0;
+//  static uint16_t log_timer                        = 0;
+
 #endif
 
 extern keymap_config_t keymap_config;
@@ -32,6 +35,8 @@ extern uint8_t is_master;
 #define _QWERTY 0
 #define _LOWER 3
 #define _RAISE 4
+#define _NAV 5
+
 #define _ADJUST 16
 
 enum custom_keycodes {
@@ -65,20 +70,22 @@ enum macro_keycodes {
 #define KC_GUIEI GUI_T(KC_LANG2)
 #define KC_ALTKN ALT_T(KC_LANG1)
 #define KC_RENT MT(MOD_RSFT,KC_ENT)
-#define KC_LTENT LT(LOWER,KC_ENT)
-#define KC_LTSPC LT(LOWER,KC_SPC)
+#define KC_LTENT LT(3,KC_ENT)
+#define KC_LTSPC LT(4,KC_SPC)
+
+#define KC_LTESC LT(_NAV, KC_ESC)
 
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_QWERTY] = LAYOUT_kc( \
   //,-----------------------------------------.                ,-----------------------------------------.
-        ESC,     Q,     W,     E,     R,     T,                      Y,     U,     I,     O,     P,  BSPC,\
+     LTESC,     Q,     W,     E,     R,     T,                      Y,     U,     I,     O,     P,  BSPC,\
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
       CTLTB,     A,     S,     D,     F,     G,                      H,     J,     K,     L,  SCLN,  QUOT,\
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
        LSFT,     Z,     X,     C,     V,     B,                      N,     M,  COMM,   DOT,  SLSH,  RENT,\
   //|------+------+------+------+------+------+------|  |------+------+------+------+------+------+------|
-                                  GUIEI, LOWER,   ENT,      SPC, RAISE, ALTKN \
+                                  GUIEI, LOWER,   LTENT,      LTSPC, RAISE, ALTKN \
                               //`--------------------'  `--------------------'
   ),
 
@@ -90,7 +97,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
        LSFT,   LEFT,   DOWN,   UP, RIGHT,   F15,                    F16,   F17,   LEFT,   DOWN,   UP, RIGHT,\
   //|------+------+------+------+------+------+------|  |------+------+------+------+------+------+------|
-                                  GUIEI, LOWER,   ENT,      SPC, RAISE, ALTKN \
+                                  GUIEI, LOWER,   LTENT,      LTSPC, RAISE, ALTKN \
                               //`--------------------'  `--------------------'
   ),
 
@@ -102,7 +109,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
        LSFT, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX,                   UNDS,  PLUS,  LBRC,  RBRC,  BSLS,  TILD,\
   //|------+------+------+------+------+------+------|  |------+------+------+------+------+------+------|
-                                  GUIEI, LOWER,   ENT,      SPC, RAISE, ALTKN \
+                                  GUIEI, LOWER,   LTENT,      LTSPC, RAISE, ALTKN \
+                              //`--------------------'  `--------------------'
+  ),
+   [_NAV] = LAYOUT_kc( \
+  //,-----------------------------------------.                ,-----------------------------------------.
+     XXXXX,  XXXXX, UP,    XXXXX, XXXXX, XXXXX,                  XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, MUTE,\
+  //|------+------+------+------+------+------|                |------+------+------+------+------+------|
+     LTOG,  LEFT,  DOWN, RIGHT, XXXXX, XXXXX,                  XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, VOLU,\
+  //|------+------+------+------+------+------|                |------+------+------+------+------+------|
+       LSFT,  LEFT,  DOWN,   UP, RIGHT,  XXXXX,                  XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, VOLD,\
+  //|------+------+------+------+------+------+------|  |------+------+------+------+------+------+------|
+                                  GUIEI, LOWER,   LTENT,      LTSPC, RAISE, ALTKN \
                               //`--------------------'  `--------------------'
   ),
 
@@ -114,9 +132,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
        LMOD,  LHUD,  LSAD,  LVAD, XXXXX, XXXXX,                  XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX,\
   //|------+------+------+------+------+------+------|  |------+------+------+------+------+------+------|
-                                  GUIEI, LOWER,   SPC,      ENT, RAISE, ALTKN \
+                                  GUIEI, LOWER,   LTENT,      LTSPC, RAISE, ALTKN \
                               //`--------------------'  `--------------------'
   )
+
+
+
+
 };
 
 int RGB_current_mode;
@@ -277,6 +299,10 @@ void render_status(void) {
 
 
 void oled_task_user(void) {
+   if (timer_elapsed32(oled_timer) > OLED_TIMEOUT) {
+        oled_off();
+        return;
+    }
   if (is_master) {
     render_status();     // Renders the current keyboard state (layer, lock, caps, scroll, etc)
   } else {
@@ -293,6 +319,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 #endif
 
 #ifdef OLED_DRIVER_ENABLE
+    oled_timer = timer_read32();
   set_keylog(keycode, record);
 #endif
 

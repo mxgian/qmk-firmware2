@@ -18,6 +18,13 @@
 #include "muse.h"
 
 extern keymap_config_t keymap_config;
+#define MEDIA_KEY_DELAY 10
+
+//define modifiers
+#define MODS_SHIFT_MASK  (MOD_BIT(KC_LSHIFT)|MOD_BIT(KC_RSHIFT))
+#define MODS_CTRL_MASK  (MOD_BIT(KC_LCTL)|MOD_BIT(KC_RCTRL))
+#define MODS_ALT_MASK  (MOD_BIT(KC_LALT)|MOD_BIT(KC_RALT))
+#define MODS_GUI_MASK  (MOD_BIT(KC_LGUI)|MOD_BIT(KC_RGUI))
 
 enum planck_layers {
   _QWERTY,
@@ -57,9 +64,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [_QWERTY] = LAYOUT_planck_grid(
     KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC,
-    LT(_NAV,KC_GESC),  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,
+    LT(_NAV,KC_ESC),  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,
     KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_SFTENT ,
-    BACKLIT, KC_LCTL, KC_LALT, KC_LGUI, LOWER,  LT(LOWER,KC_ENT),  LT(RAISE,KC_SPC),  LT(RAISE,KC_SPC),   KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT
+    BACKLIT, KC_LCTL, KC_LALT, KC_LGUI, LT(LOWER,KC_ENT),  LT(LOWER,KC_ENT),  LT(RAISE,KC_SPC),  LT(RAISE,KC_SPC),   KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT
 ),
 
 /* Colemak
@@ -289,23 +296,94 @@ void encoder_update(bool clockwise) {
       }
     }
   } else {
+  uint16_t held_keycode_timer = timer_read();
+
+/*nothing - vol up/down
+lower - horizontal scroll
+raise - vertical scroll
+ctrl - cycle through chrome tabs
+alt - cycle through workspaces/virtual desktops (Mac)
+gui - zoom in/out
+*/
+if (index == 0) {
+	if (get_mods() & MODS_ALT_MASK) {
+       if (clockwise) {
+         register_code(KC_RIGHT);
+         unregister_code(KC_RIGHT);
+       }else {
+           register_code(KC_LEFT);
+           unregister_code(KC_LEFT);
+       }
+      }else {
+        if (get_mods() & MODS_GUI_MASK) {
+          if (clockwise) {
+            register_code(KC_MS_WH_UP);
+            unregister_code(KC_MS_WH_UP);
+          }else {
+              register_code(KC_MS_WH_DOWN);
+              unregister_code(KC_MS_WH_DOWN);
+          }
+        } else {
+          if (get_mods() & MODS_CTRL_MASK) {
+            if (clockwise) {
+              register_code(KC_TAB);
+              unregister_code(KC_TAB);
+            }else {
+              register_code(KC_LSHIFT);
+              register_code(KC_TAB);
+              unregister_code(KC_LSHIFT);
+              unregister_code(KC_TAB);
+            }
+          }
+        }
+      }
+
+if (IS_LAYER_ON(_LOWER)) {
     if (clockwise) {
-      #ifdef MOUSEKEY_ENABLE
-        register_code(KC_MS_WH_DOWN);
-        unregister_code(KC_MS_WH_DOWN);
-      #else
-        register_code(KC_PGDN);
-        unregister_code(KC_PGDN);
-      #endif
+	    register_code(KC_WH_D);
+		while (timer_elapsed(held_keycode_timer) < MEDIA_KEY_DELAY) {
+	      // no-op
+		}
+		unregister_code(KC_WH_D);
     } else {
-      #ifdef MOUSEKEY_ENABLE
-        register_code(KC_MS_WH_UP);
-        unregister_code(KC_MS_WH_UP);
-      #else
-        register_code(KC_PGUP);
-        unregister_code(KC_PGUP);
-      #endif
+	    register_code(KC_WH_U);
+		while (timer_elapsed(held_keycode_timer) < MEDIA_KEY_DELAY) {
+	      // no-op
+	    }
+		unregister_code(KC_WH_U);
     }
+    }
+	if (IS_LAYER_ON(_RAISE)) {
+	    if (clockwise) {
+		    register_code(KC_PGDN);
+		    while (timer_elapsed(held_keycode_timer) < MEDIA_KEY_DELAY) {
+		      // no-op
+		    }
+			unregister_code(KC_PGDN);
+	    } else {
+		    register_code(KC_PGUP);
+		    while (timer_elapsed(held_keycode_timer) < MEDIA_KEY_DELAY) {
+		      // no-op
+		    }
+			unregister_code(KC_PGUP);
+	    }
+	    }
+      else {
+		    if (clockwise) {
+		      register_code(KC_VOLD);
+		      while (timer_elapsed(held_keycode_timer) < MEDIA_KEY_DELAY) {
+		        // no-op
+		      }
+		      unregister_code(KC_VOLD);
+		    } else {
+		      register_code(KC_VOLU);
+		      while (timer_elapsed(held_keycode_timer) < MEDIA_KEY_DELAY) {
+		        // no-op
+		      }
+		      unregister_code(KC_VOLU);
+		    }
+    }
+}
   }
 }
 
