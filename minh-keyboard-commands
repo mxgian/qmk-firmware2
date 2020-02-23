@@ -2,8 +2,9 @@ keyboard directories to zip up when rebuilding
 (run this from github/qmk_firmware)
 zip all-my-keebs.zip keyboards/thevankeyboards/bananasplit/keymaps/minh keyboards/keebio/bdn9/keymaps/minh
 
-
+git fetch upstream
 git merge upstream/master
+git push
 switch avr-gcc versions: echo 'export PATH="/usr/local/opt/avr-gcc@7/bin:$PATH"' >> ~/.bash_profile
 current version of avr-gcc is under /usr/local/bin
 
@@ -90,11 +91,16 @@ make-dir: github/qmk_firmware
 make-cmd: make cannonkeys/instant60:minh
 dfu-util -d 0483:df11 -a 0 -s 0x8000000 -D ./cannonkeys_instant60_minh.bin
 
+jerkin
+keyboard-dir:github/qmk_firmware/keyboards/wsk/jerkin/keymaps/minh
+make-dir: github/qmk_firmware
+make-cmd: make wsk/jerkin:minh:avrdude
+
 jj50 (bootmapper to QMK)
 keyboard-dir:github/qmk_firmware/keyboards/jj50/keymaps/minh
 make-dir: github/qmk_firmware
-make-cmd: make jj50:default
-bootloadHID -r jj50_default.hex
+make-cmd: make jj50:minh
+bootloadHID -r jj50_minh.hex
 
 lunar
 keyboard-dir:github/qmk_firmware/keyboards/ai03/lunar/keymaps/minh
