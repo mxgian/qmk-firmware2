@@ -81,7 +81,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define PIN_WS2812      15
 #define WS2812_SPI SPID2
 
-
+#define OLED_FONT_H "glcdfont_d48.c"
+#define OLED_TIMEOUT 0
 
 
 /*

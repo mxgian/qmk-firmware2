@@ -52,5 +52,6 @@ NKRO_ENABLE = yes	    # USB Nkey Rollover
 BACKLIGHT_ENABLE = yes
 RGBLIGHT_ENABLE = yes
 ENCODER_ENABLE = yes
+OLED_DRIVER_ENABLE = yes
 
 LAYOUTS = ortho_4x12

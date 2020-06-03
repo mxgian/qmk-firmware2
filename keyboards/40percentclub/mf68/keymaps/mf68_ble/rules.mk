@@ -6,3 +6,5 @@ F_CPU = 8000000
 #
 BLUETOOTH = AdafruitBLE
 BACKLIGHT_ENABLE = no
+CONSOLE_ENABLE = yes         # Console for debug
+COMMAND_ENABLE = yes

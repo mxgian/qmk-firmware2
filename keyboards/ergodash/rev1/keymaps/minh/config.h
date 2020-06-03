@@ -18,9 +18,15 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#pragma once
+#ifndef CONFIG_USER_H
+#define CONFIG_USER_H
 
-//#define USE_MATRIX_I2C
+#include "../../config.h"
+
+/* Use I2C or Serial, not both */
+
+#define USE_SERIAL
+// #define USE_I2C
 
 /* Select hand configuration */
 
@@ -28,29 +34,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // #define MASTER_RIGHT
 // #define EE_HANDS
 
-//#define SSD1306OLED
-
-#define USE_SERIAL_PD2
-
-//#define TAPPING_FORCE_HOLD
-#define TAPPING_TERM 200
+#endif
+#undef TAPPING_TERM
+#define TAPPING_TERM 300
 
 #undef RGBLED_NUM
 #define RGBLIGHT_ANIMATIONS
-#define RGBLED_NUM 28
-#define RGBLIGHT_LIMIT_VAL 100
+#define RGBLED_NUM 24
 #define RGBLIGHT_HUE_STEP 10
 #define RGBLIGHT_SAT_STEP 17
 #define RGBLIGHT_VAL_STEP 17
-#define RGBLIGHT_SLEEP
-
-#define OLED_TIMEOUT 30000
-#define OLED_FONT_H "keyboards/crkbd/keymaps/minh/glcdfont.c"
-
-
-// add to convert pro-micro to QMK-DFU
-
-#define QMK_ESC_OUTPUT F4 // usually COL
-#define QMK_ESC_INPUT D4 // usually ROW
-#define QMK_LED B0
-//#define QMK_SPEAKER C6

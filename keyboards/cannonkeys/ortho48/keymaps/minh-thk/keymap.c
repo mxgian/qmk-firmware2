@@ -15,9 +15,19 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 #include QMK_KEYBOARD_H
+#include "muse.h"
+
 #ifdef OLED_DRIVER_ENABLE
   #include "oled_driver.h"
+    static uint32_t oled_timer                       = 0;
+
 #endif
+
+
+
+#define _MAIN 0
+#define _ALPHA 1
+#define _BETA 2
 
 extern keymap_config_t keymap_config;
 #define MEDIA_KEY_DELAY 10
@@ -271,6 +281,125 @@ if (IS_LAYER_ON(_LOWER)) {
 }  //end if index = 1
 
 }
+
+
+
+#ifdef OLED_DRIVER_ENABLE
+
+void set_keylog(uint16_t keycode, keyrecord_t *record);
+
+oled_rotation_t oled_init_user(oled_rotation_t rotation) {
+    return OLED_ROTATION_0;
+}
+void render_crkbd_logo(void) {
+  static const char PROGMEM crkbd_logo[] = {
+      0x80, 0x81, 0x82, 0x83, 0x84, 0x85, 0x86, 0x87, 0x88, 0x89, 0x8a, 0x8b, 0x8c, 0x8d, 0x8e, 0x8f, 0x90, 0x91, 0x92, 0x93, 0x94,
+      0xa0, 0xa1, 0xa2, 0xa3, 0xa4, 0xa5, 0xa6, 0xa7, 0xa8, 0xa9, 0xaa, 0xab, 0xac, 0xad, 0xae, 0xaf, 0xb0, 0xb1, 0xb2, 0xb3, 0xb4,
+      0xc0, 0xc1, 0xc2, 0xc3, 0xc4, 0xc5, 0xc6, 0xc7, 0xc8, 0xc9, 0xca, 0xcb, 0xcc, 0xcd, 0xce, 0xcf, 0xd0, 0xd1, 0xd2, 0xd3, 0xd4,
+      0};
+  oled_write_P(crkbd_logo, false);
+}
+
+void oled_task_user(void) {
+
+
+     if (timer_elapsed32(oled_timer) > OLED_TIMEOUT) {
+        oled_off();
+        return;
+    }
+   else {
+    render_crkbd_logo();
+    oled_scroll_right() ;  // Turns on scrolling
+  }
+/*
+ // Host Keyboard Layer Status
+    uint8_t current_layer = biton32(layer_state);
+    static const char PROGMEM icons[4][3][6] = {
+        {
+            { 0x80, 0x81, 0x82, 0x83, 0x84, 0 },
+            { 0xa0, 0xa1, 0xa2, 0xa3, 0xa4, 0 },
+            { 0xc0, 0xc1, 0xc2, 0xc3, 0xc4, 0 }
+        },
+        {
+            { 0x85, 0x86, 0x87, 0x88, 0x89, 0 },
+            { 0xa5, 0xa6, 0xa7, 0xa8, 0xa9, 0 },
+            { 0xc5, 0xc6, 0xc7, 0xc8, 0xc9, 0 }
+        },
+        {
+            { 0x8a, 0x8b, 0x8c, 0x8d, 0x8e, 0 },
+            { 0xaa, 0xab, 0xac, 0xad, 0xae, 0 },
+            { 0xca, 0xcb, 0xcc, 0xcd, 0xce, 0 }
+        },
+        {
+            { 0x8f, 0x90, 0x91, 0x92, 0x93, 0 },
+            { 0xaf, 0xb0, 0xb1, 0xb2, 0xb3, 0 },
+            { 0xcf, 0xd0, 0xd1, 0xd2, 0xd3, 0 }
+        }
+    };
+
+    uint8_t icon_index = current_layer == _MAIN ? 3 : current_layer == _ALPHA ? 1 : 2;
+    for (int i = 0; i < 3; i++) {
+        oled_set_cursor(0, i + 1);
+        oled_write_P(icons[icon_index][i], false);
+    }
+
+    oled_set_cursor(6, 1);
+    oled_write_P(PSTR("-D48 Custom-\n"), false);
+
+    uint8_t layer_index = current_layer == _MAIN ? 0 : current_layer == _ALPHA ? 1 : 2;
+    const char *layers[3] = {
+        PSTR("MAIN"),
+        PSTR("ALPHA"),
+        PSTR("BETA")
+    };
+    oled_set_cursor(6, 2);
+    oled_write_P("Layer: ", false);
+    oled_write_P(layers[layer_index], false);
+    oled_write_P("\n", false);
+
+    */
+/*
+    static const char PROGMEM mods[][2] = {
+        {0x94, 0x95}, // CTL
+        {0x96, 0x97}, // ALT
+        {0x98, 0x99}, // GUI
+        {0x9a, 0x9b},  // SFT
+        // {0x9c, 0x9d},  // EMPTY
+    };
+*/
+   /* char mod_data[13] = "\x9c\x9d\x9c\x9d\x9c\x9d\x9c\x9d \x07\x07\x07\0";
+    if (ctrl_pressed) strncpy(mod_data, mods[0], 2);;
+    if (alt_pressed) strncpy(mod_data + 2, mods[1], 2);;
+    if (gui_pressed) strncpy(mod_data + 4, mods[2], 2);;
+    if (shift_pressed) strncpy(mod_data + 6, mods[3], 2);;
+    uint8_t led_usb_state = host_keyboard_leds();
+    if (led_usb_state & (1 << USB_LED_NUM_LOCK)) mod_data[9] = 'N';
+    if (led_usb_state & (1 << USB_LED_CAPS_LOCK)) mod_data[10] = 'C';
+    if (led_usb_state & (1 << USB_LED_SCROLL_LOCK)) mod_data[11] = 'S';
+
+    oled_set_cursor(6, 3);
+    oled_write(mod_data, false);
+*/
+    /*[>uint8_t led_usb_state = host_keyboard_leds();<]*/
+    /*[>oled_write_P(led_usb_state & (1<<USB_LED_NUM_LOCK) ? PSTR("NUMLCK ") : PSTR("       "), false);<]*/
+    /*[>oled_write_P(led_usb_state & (1<<USB_LED_CAPS_LOCK) ? PSTR("CAPLCK ") : PSTR("       "), false);<]*/
+    /*[>oled_write_P(led_usb_state & (1<<USB_LED_SCROLL_LOCK) ? PSTR("SCRLCK ") : PSTR("       "), false);<]*/
+}
+#endif
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+  if (record->event.pressed) {
+
+    #ifdef OLED_DRIVER_ENABLE
+      oled_timer = timer_read32();
+     // set_keylog(keycode, record);
+    #endif
+
+    // set_timelog();
+  }
+  return true;
+
+}
+
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 

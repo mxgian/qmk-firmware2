@@ -2,8 +2,7 @@ keyboard directories to zip up when rebuilding
 (run this from github/qmk_firmware)
 zip all-my-keebs.zip keyboards/thevankeyboards/bananasplit/keymaps/minh keyboards/keebio/bdn9/keymaps/minh
 
-git fetch upstream
-git merge upstream/master
+
 git push
 switch avr-gcc versions: echo 'export PATH="/usr/local/opt/avr-gcc@7/bin:$PATH"' >> ~/.bash_profile
 current version of avr-gcc is under /usr/local/bin
@@ -45,7 +44,7 @@ ergodash
 keyboard-dir:github/qmk_firmware/keyboard/ergodash/rev2/keymaps/minh
 make-dir: github/qmk_firmware
 switch avr-gcc versions: export PATH="/usr/local/opt/avr-gcc@7/bin:$PATH"
-make-cmd: make ergodash/rev2:minh  (dfu or avrdude)
+make-cmd: make ergodash/rev1:minh  (dfu or avrdude)
 
 espectro
 keyboard-dir:github/qmk_firmware/keyboard/espectro/keymaps/minh

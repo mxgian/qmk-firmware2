@@ -2,11 +2,12 @@
 VPATH += keyboards/cannonkeys/bluepill
 SRC =	led.c \
       keyboard.c \
+	  muse.c \
 
 # GENERIC STM32F103C8T6 board - stm32duino bootloader
 OPT_DEFS = -DCORTEX_VTOR_INIT=0x2000
 MCU_LDSCRIPT = STM32F103x8_stm32duino_bootloader
-BOARD = GENERIC_STM32_F103
+BOARD = STM32_F103_STM32DUINO
 
 # OPT_DEFS =
 # MCU_LDSCRIPT = STM32F103x8
@@ -52,8 +53,11 @@ NKRO_ENABLE = yes	    # USB Nkey Rollover
 BACKLIGHT_ENABLE = yes
 RGBLIGHT_ENABLE = yes
 ENCODER_ENABLE = yes
-OLED_DRIVER_ENABLE = no
-AUDIO_ENABLE = no
+OLED_DRIVER_ENABLE = yes
+AUDIO_ENABLE = yes
+#FAUXCLICKY_ENABLE = yes
+USE_I2C = no
+
 #QWIIC_ENABLE += MICRO_OLED
 
 

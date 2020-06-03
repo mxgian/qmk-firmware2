@@ -66,17 +66,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "qwiic.h"
 #endif
 
-/*
-#ifdef I2C1_SCL
-    #undef I2C1_SCL 6
-#endif
-#ifdef I2C1_SDA
-    #undef I2C1_SDA 7
-#endif
+#define OLED_FONT_H "keyboards/cannonkeys/ortho48/keymaps/minh-thk/glcdfont.c"
+#define OLED_TIMEOUT 30000
 
-#define I2C1_SCL B6
-#define I2C1_SDA B7
-*/
+
 
 /* Set 0 if debouncing isn't needed */
 #define DEBOUNCE    5
@@ -96,7 +89,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define PIN_WS2812      15
 #define WS2812_SPI SPID2
 
-#define B5_AUDIO
+#define D5_AUDIO
 
 
 
