@@ -48,13 +48,15 @@ MOUSEKEY_ENABLE = yes	# Mouse keys
 EXTRAKEY_ENABLE = yes	# Audio control and System control
 CONSOLE_ENABLE = yes	# Console for debug
 COMMAND_ENABLE = yes    # Commands for debug and configuration
+WPM_ENABLE = yes
 SLEEP_LED_ENABLE = yes  # Breathing sleep LED during USB suspend
 NKRO_ENABLE = yes	    # USB Nkey Rollover
 BACKLIGHT_ENABLE = yes
 RGBLIGHT_ENABLE = yes
 ENCODER_ENABLE = yes
 OLED_DRIVER_ENABLE = yes
-AUDIO_ENABLE = yes
+CLACKCAT = no
+AUDIO_ENABLE = no
 #FAUXCLICKY_ENABLE = yes
 USE_I2C = no
 
