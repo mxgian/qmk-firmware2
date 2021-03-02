@@ -20,8 +20,8 @@ SWAP_HANDS_ENABLE = no      # Enable one-hand typing
 
 # Do not enable SLEEP_LED_ENABLE. it uses the same timer as BACKLIGHT_ENABLE
 SLEEP_LED_ENABLE = no    # Breathing sleep LED during USB suspend
-OLED_DRIVER_ENABLE = no
-#OLED_DRIVER_ENABLE = yes
+#OLED_DRIVER_ENABLE = no
+OLED_DRIVER_ENABLE = yes
 
 # add for qmk-dfu bootloader
 BOOTLOADER = qmk-dfu

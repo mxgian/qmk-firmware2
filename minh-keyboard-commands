@@ -2,6 +2,9 @@ keyboard directories to zip up when rebuilding
 (run this from github/qmk_firmware)
 zip all-my-keebs.zip keyboards/thevankeyboards/bananasplit/keymaps/minh keyboards/keebio/bdn9/keymaps/minh
 
+git fetch upstream/master
+git commit
+git merge upstream/master
 
 git push
 switch avr-gcc versions: echo 'export PATH="/usr/local/opt/avr-gcc@7/bin:$PATH"' >> ~/.bash_profile
@@ -123,11 +126,6 @@ make-dir: github/qmk_firmware
 make-cmd: make cannonkeys/ortho48:minh-thk
 dfu-util -d 1eaf:0003 -a 2 -D ./cannonkeys_ortho48_minh-thk.bin
 
-ortho60
-keyboard-dir:github/qmk_firmware/keyboards/cannonkeys/ortho60/keymaps/minh
-make-dir: github/qmk_firmware
-make-cmd: make cannonkeys/ortho60:minh
-dfu-util -d 1eaf:0003 -a 2 -D ./cannonkeys_ortho60_minh.bin
 
 
 (plancks share the same keymap file)
@@ -171,7 +169,4 @@ keyboard-dir:github/qmk_firmware/keyboards/ut472/keymaps/minh
 make-dir: github/qmk_firmware
 make-cmd: make ut472:minh
 
-zlant
-keyboard-dir:github/qmk_firmware/keyboards/zlant/keymaps/minh
-make-dir: github/qmk_firmware
-make-cmd: make zlant:minh
+

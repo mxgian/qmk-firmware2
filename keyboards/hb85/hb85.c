@@ -88,7 +88,7 @@ void matrix_scan_user(void) {
 
 }
 
-
+/*
 void backlight_init_ports(void) {
     // initialize pins D0, D1, D4 and D6 as output
     setPinOutput(D0);
@@ -102,6 +102,7 @@ void backlight_init_ports(void) {
     writePinHigh(D4);
     writePinHigh(D6);
 }
+
 
 void backlight_set(uint8_t level) {
 	if (level == 0) {
@@ -118,3 +119,4 @@ void backlight_set(uint8_t level) {
         writePinHigh(D6);
 	}
 }
+*/

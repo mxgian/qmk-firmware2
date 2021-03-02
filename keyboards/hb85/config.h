@@ -19,8 +19,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "config_common.h"
 
-#define VENDOR_ID       0x20A0
-#define PRODUCT_ID      0x422D
+#define VENDOR_ID       0x4753
+#define PRODUCT_ID      0x2000
+#define DEVICE_VER      0x0200
 #define MANUFACTURER    GrayStudio
 #define PRODUCT         HB85
 
@@ -38,6 +39,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define DEBOUNCING_DELAY 5
 
 #define NO_BACKLIGHT_CLOCK
+#define BACKLIGHT_PIN D4
 #define BACKLIGHT_LEVELS 5
 #define RGBLIGHT_ANIMATIONS
 
