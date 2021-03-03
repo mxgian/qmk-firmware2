@@ -31,6 +31,13 @@ void led_init_ports(void) {
     writePinLow(C15);
     setPinOutput(B9);
     writePinLow(B9);
+    // to test the leds
+    setPinOutput(B2);
+    writePinHigh(B2);
+    setPinOutput(C15);
+    writePinHigh(C15);
+    setPinOutput(B9);
+    writePinHigh(B9);
 }
 
 bool led_update_kb(led_t led_state) {

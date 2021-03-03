@@ -39,6 +39,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define BACKLIGHT_BREATHING
 #define BREATHING_PERIOD 6
 
+#define NUMBER_OF_ENCODERS 1
+
 /* define if matrix has ghost */
 //#define MATRIX_HAS_GHOST
 
