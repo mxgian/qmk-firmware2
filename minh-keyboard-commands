@@ -5,8 +5,9 @@ zip all-my-keebs.zip keyboards/thevankeyboards/bananasplit/keymaps/minh keyboard
 git fetch upstream/master
 git commit
 git merge upstream/master
-
 git push
+
+
 switch avr-gcc versions: echo 'export PATH="/usr/local/opt/avr-gcc@7/bin:$PATH"' >> ~/.bash_profile
 current version of avr-gcc is under /usr/local/bin
 

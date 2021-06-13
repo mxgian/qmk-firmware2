@@ -69,10 +69,11 @@ layer_state_t layer_state_set_user(layer_state_t state) {
     return state;
 }
 
-bool led_update_user(led_t led_state) {
-    writePin(B5, led_state.caps_lock);
-    return false;
-}
+//
+//bool led_update_user(led_t led_state) {
+//    writePin(B5, led_state.caps_lock);
+//    return false;
+//}
 
 void encoder_update_user(uint8_t index, bool clockwise) {
     if (index == 0) {
